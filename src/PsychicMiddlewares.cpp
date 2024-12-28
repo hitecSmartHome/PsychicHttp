@@ -161,6 +161,7 @@ void CorsMiddleware::addCORSHeaders(PsychicResponse* response)
 esp_err_t CorsMiddleware::run(PsychicRequest* request, PsychicResponse* response, PsychicMiddlewareNext next)
 {
   if (request->hasHeader("Origin")) {
+    _origin = request->header("Origin");
     addCORSHeaders(response);
     if (request->method() == HTTP_OPTIONS) {
       return response->send(200);
